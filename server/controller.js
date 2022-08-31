@@ -1,3 +1,5 @@
+let goals = [];
+
 module.exports = {
   getCompliment: (req, res) => {
     const compliments = [
@@ -26,4 +28,10 @@ module.exports = {
 
     res.status(200).send(randomFortune);
   },
+  postGoal: (req, res) => {
+    let goal = req.body.goal;
+    goals.push(goal);
+    console.log(goals);
+    res.status(200).send(goals);
+  }
 };

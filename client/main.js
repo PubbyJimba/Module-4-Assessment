@@ -1,5 +1,7 @@
 const complimentBtn = document.getElementById("complimentButton");
 const fortuneBtn = document.getElementById("fortuneButton");
+const announceBtn = document.getElementById("announcement");
+const annInput = document.getElementById("ann-input")
 const formBtn = document.getElementById("form");
 const goalsInput = document.getElementById("goals-input");
 const section = document.getElementById("section");
@@ -18,6 +20,16 @@ const getFortune = () => {
   });
 };
 
+const announce = (e) => {
+  e.preventDefault();
+  const inputValue = annInput.value;
+  const body = { inputValue };
+  axios.post("http://localhost:4000/api/announcement/", body).then((res) => {
+    const data = res.data;
+    alert(data);
+  })
+}
+
 const postGoals = (e) => {
   e.preventDefault();
   const inputValue = goalsInput.value;
@@ -32,3 +44,4 @@ const postGoals = (e) => {
 complimentBtn.addEventListener("click", getCompliment);
 fortuneBtn.addEventListener("click", getFortune);
 formBtn.addEventListener("submit", postGoals);
+announceBtn.addEventListener("submit", announce);

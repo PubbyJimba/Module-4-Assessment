@@ -28,6 +28,10 @@ module.exports = {
 
     res.status(200).send(randomFortune);
   },
+  announce : (req, res) => {
+    const { inputValue } = req.body;
+    res.status(200).send(inputValue);
+  },
   postGoal: (req, res) => {
     const { inputValue } = req.body;
     // goals.push(inputValue);

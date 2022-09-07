@@ -1,4 +1,4 @@
-let goals = [];
+// let goals = [];
 
 module.exports = {
   getCompliment: (req, res) => {
@@ -29,9 +29,8 @@ module.exports = {
     res.status(200).send(randomFortune);
   },
   postGoal: (req, res) => {
-    let goal = req.body.goal;
-    goals.push(goal);
-    console.log(goals);
-    res.status(200).send(goals);
+    const { inputValue } = req.body;
+    // goals.push(inputValue);
+    res.status(200).send(inputValue);
   }
 };

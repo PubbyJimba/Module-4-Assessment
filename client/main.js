@@ -1,8 +1,8 @@
 const complimentBtn = document.getElementById("complimentButton");
 const fortuneBtn = document.getElementById("fortuneButton");
-const form = document.getElementById("form");
+const formBtn = document.getElementById("form");
 const goalsInput = document.getElementById("goals-input");
-const goalsList = document.getElementById("goals-list");
+const section = document.getElementById("section");
 
 const getCompliment = () => {
   axios.get("http://localhost:4000/api/compliment/").then((res) => {
@@ -20,25 +20,15 @@ const getFortune = () => {
 
 const postGoals = (e) => {
   e.preventDefault();
-  const goal = { goal: goalsInput.value };
-  axios.post("http://localhost:4000/api/goals/", goal).then((res) => {
-    const data = res.data;
-    console.log(data);
-
-    if (goalsList.hasChildNodes()) {
-      goalsList.removeChild(goalsList.childNodes[0]);
-    }
-
-    let ul = document.createElement("ul");
-    goalsList.append(ul);
-    for (let i = 0; i < data.length; i++) {
-      let li = document.createElement("li");
-      li.append(res.data[i]);
-      ul.append(li);
-    }
+  const inputValue = goalsInput.value;
+  const body = { inputValue };
+  axios.post("http://localhost:4000/api/goals/", body).then((res) => {
+    let goalsListing = document.createElement("div");
+    goalsListing.innerHTML = `<h3>${res.data}</h3>`;
+    section.appendChild(goalsListing);
   });
 };
 
 complimentBtn.addEventListener("click", getCompliment);
 fortuneBtn.addEventListener("click", getFortune);
-form.addEventListener("submit", postGoals);
+formBtn.addEventListener("submit", postGoals);
